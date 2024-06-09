@@ -18,6 +18,7 @@ export default function Home() {
   useEffect(()=>{
       const isAdmin= new URLSearchParams(window.location.search).get("isAdmin") 
       setIsAdmin(isAdmin)
+      logOpened()
   },[ ])
 
   useEffect(()=>{
@@ -134,6 +135,13 @@ export default function Home() {
     }
   }
 
+  const logOpened = () => {
+    firebase.firestore().collection("logs").add({
+      date: firebase.firestore.Timestamp.now(),
+      userAgent: window.navigator.userAgent
+    })
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -158,7 +166,7 @@ export default function Home() {
               <Carousel.Item key={item.image}> 
                 {  
                     isAdmin ?
-                    <div className='mb-2 text-center'>
+                    <div className='mb-2 text-center' style={{zIndex:999,position:"relative"}}>
                        <Button onClick={() => addNew()} className='mx-1 mt-1'> Add </Button>
                       <Button onClick={() => edit(item)} className='mr-2 mt-1'> Edit </Button>
                         {
@@ -172,7 +180,7 @@ export default function Home() {
                 <img src={item.img} style={{width:"100%"}}/>
                   <Carousel.Caption>  
                      <p style={{fontSize:"13px"}}>{item.message}</p>
-                     <p style={{fontSize:"10px"}} >{moment(item?.date?.toDate?.()?.toString?.()).format("MM/DD/YYYY HH:mm")}</p>
+                     <p style={{fontSize:"10px"}} >{moment(item?.date?.toDate?.()?.toString?.()).format("MM/DD/YYYY hh:mm A")}</p>
                   </Carousel.Caption>
                   
               </Carousel.Item>

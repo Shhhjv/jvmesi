@@ -1,16 +1,13 @@
 {
-    "hosting": {
-      "public": "out",
-      "site": "jvmesi-c9d12",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**",
-        ".firebase",
-        "analyze",
-        "/analyze"
-      ]
-    },
+  "hosting": {
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true
+  },
     "functions": {
       "source": ".",
       "runtime": "nodejs18"

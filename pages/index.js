@@ -146,7 +146,15 @@ export default function Home() {
 
       <Carousel  activeIndex={selectedIndex} onSelect={handleSelect}> 
           {
-            data.filter(a => a).map(item => (
+            data
+            .filter(a => a)
+            .sort((a,b) => {
+              const aDate = new Date(a?.date?.toDate?.()?.toString?.())
+              const bDate = new Date(b?.date?.toDate?.()?.toString?.())
+
+              return bDate - aDate
+            })
+            .map(item => (
               <Carousel.Item key={item.image}> 
                 {  
                     isAdmin ?
